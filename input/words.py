@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-class ScoredWords:
+class ScoredInputWords:
 
     def __init__(self, input_file_path):
         self.words = pd.read_csv(input_file_path)
@@ -12,6 +12,9 @@ class ScoredWords:
 
     def get_words(self):
         return [word for word in self.words['Word']]
+
+    def get_scores_by_words(self):
+        return {row["Word"]: row["Average"] for index, row in self.words.iterrows()}
 
     def hist(self):
         plt.hist(self.words["Average"], bins=10)

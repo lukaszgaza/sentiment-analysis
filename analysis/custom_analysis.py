@@ -9,6 +9,9 @@ class SumScoredByScoredCountAnalysisNoNeutralWords(analysis.general_analysis.Gen
 
     def __init__(self, book):
         super().__init__(SumScoredByScoredCountAnalysisNoNeutralWords.ANALYSIS_NAME, book)
+        self.plot_title = 'Sentiment as sum of scored words in a slice by count of scored words'
+        self.plot_xlabel = 'Slice number'
+        self.plot_ylabel = 'Sentiment'
 
     def score(self, slice_size, scored_input_words_df):
         words = self.book.get_words_lower()
@@ -25,6 +28,9 @@ class DistanceToPreviousWordWithSentiment(analysis.general_analysis.GeneralAnaly
 
     def __init__(self, book):
         super().__init__(DistanceToPreviousWordWithSentiment.ANALYSIS_NAME, book)
+        self.plot_title = 'Distance to previous word with sentiment'
+        self.plot_xlabel = 'Word number'
+        self.plot_ylabel = 'Distance'
 
     def score(self, slice_size, scored_input_words_df):
         words = self.book.get_words_lower()

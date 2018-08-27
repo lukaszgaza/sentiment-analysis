@@ -1,4 +1,5 @@
 import csv
+import matplotlib.pyplot as plt
 
 class GeneralAnalysis:
 
@@ -6,6 +7,9 @@ class GeneralAnalysis:
         self.analysis_name = analysis_name
         self.book = book
         self.scores = []
+        self.plot_title = ''
+        self.plot_xlabel = ''
+        self.plot_ylabel = ''
 
     def score(self, slice_size, scored_input_words_df):
         pass
@@ -34,3 +38,10 @@ class GeneralAnalysis:
 
                 score_writer.writerow(row)
                 slice_number += 1
+
+    def plot(self):
+        plt.title(self.plot_title)
+        plt.xlabel(self.plot_xlabel)
+        plt.ylabel(self.plot_ylabel)
+        plt.plot(self.scores)
+        plt.show()

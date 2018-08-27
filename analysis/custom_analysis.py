@@ -22,12 +22,12 @@ class SumScoredByScoredCountAnalysisNoNeutralWords(analysis.general_analysis.Gen
         return self.scores
 
 
-class DistanceToPreviousWordWithSentiment(analysis.general_analysis.GeneralAnalysis):
+class DistanceToPreviousWordWithSentimentAnalysis(analysis.general_analysis.GeneralAnalysis):
 
     ANALYSIS_NAME = 'distance_to_previous_word_with_sentiment'
 
     def __init__(self, book):
-        super().__init__(DistanceToPreviousWordWithSentiment.ANALYSIS_NAME, book)
+        super().__init__(DistanceToPreviousWordWithSentimentAnalysis.ANALYSIS_NAME, book)
         self.plot_title = 'Distance to previous word with sentiment'
         self.plot_xlabel = 'Word number'
         self.plot_ylabel = 'Distance'
@@ -44,6 +44,26 @@ class DistanceToPreviousWordWithSentiment(analysis.general_analysis.GeneralAnaly
                 prev_count = 0
             else:
                 prev_count += 1
+
+        return self.scores
+
+
+class NumberOfWordsWithSentimentPerSliceAnalysis(analysis.general_analysis.GeneralAnalysis):
+
+    ANALYSIS_NAME = 'number_of_words_with_sentiment_per_slice'
+
+    def __init__(self, book):
+        super().__init__(NumberOfWordsWithSentimentPerSliceAnalysis.ANALYSIS_NAME, book)
+        self.plot_title = 'Number of words with sentiment per slice'
+        self.plot_xlabel = 'Slice number'
+        self.plot_ylabel = 'Number of words with sentiment'
+
+    def score(self, slice_size, scored_input_words_df):
+        words = self.book.get_words_lower()
+        slices = analysis.slice_generator.SliceGenerator(slice_size).get_non_overlapping_windows(words)
+
+        self.scores = list(map(analysis.scoring.score_slice_as_count_of_scored_words(scored_input_words_df,
+                                                                                   analysis.scoring.NEUTRAL_WORD_FILTER), slices))
 
         return self.scores
 

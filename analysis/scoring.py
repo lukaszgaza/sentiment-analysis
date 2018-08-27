@@ -4,7 +4,7 @@ NEUTRAL_WORD_FILTER = lambda score: score <= AVERAGE_SCORE - DELTA or score >= A
 TRUE_FILTER = lambda score: True
 
 
-def score_slice_as_avg_of_scored_words(scored_input_words_df, filter):
+def score_slice_as_avg_of_scored_words(scored_input_words_df, filter_fun):
 
     scores_by_words = scored_input_words_df.get_scores_by_words()
 
@@ -15,7 +15,7 @@ def score_slice_as_avg_of_scored_words(scored_input_words_df, filter):
         for word in slice:
             if word in scores_by_words:
                 score = scores_by_words[word]
-                if filter(score):
+                if filter_fun(score):
                     total_score += score
                     count += 1
 
@@ -24,6 +24,25 @@ def score_slice_as_avg_of_scored_words(scored_input_words_df, filter):
         return total_score / count
 
     return score_slice_as_avg_of_scored_words_helper
+
+
+def score_slice_as_count_of_scored_words(scored_input_words_df, filter_fun):
+
+    scores_by_words = scored_input_words_df.get_scores_by_words()
+
+    def score_slice_as_count_of_scored_words_helper(slice):
+        count = 0
+
+        for word in slice:
+            if word in scores_by_words:
+                score = scores_by_words[word]
+
+                if filter_fun(score):
+                    count += 1
+
+        return count
+
+    return score_slice_as_count_of_scored_words_helper
 
 
 

@@ -1,5 +1,10 @@
 
 class Input:
+    def get_title(self):
+        return self.title
+
+    def get_author(self):
+        return self.author
 
     def get_raw_text(self):
         pass

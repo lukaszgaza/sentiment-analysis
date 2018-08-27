@@ -9,7 +9,6 @@ class SumScoredByScoredCountAnalysisNoNeutralWords(analysis.general_analysis.Gen
 
     def __init__(self, book):
         super().__init__(SumScoredByScoredCountAnalysisNoNeutralWords.ANALYSIS_NAME, book)
-        self.scores = []
 
     def score(self, slice_size, scored_input_words_df):
         words = self.book.get_words_lower()

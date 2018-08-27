@@ -15,7 +15,7 @@ def score_slice_as_avg_of_scored_words(scored_input_words_df, filter):
         for word in slice:
             if word in scores_by_words:
                 score = scores_by_words[word]
-                if NEUTRAL_WORD_FILTER(score):
+                if filter(score):
                     total_score += score
                     count += 1
 

@@ -19,6 +19,29 @@ class SumScoredByScoredCountAnalysisNoNeutralWords(analysis.general_analysis.Gen
         return self.scores
 
 
+class DistanceToPreviousWordWithSentiment(analysis.general_analysis.GeneralAnalysis):
+
+    ANALYSIS_NAME = 'distance_to_previous_word_with_sentiment'
+
+    def __init__(self, book):
+        super().__init__(DistanceToPreviousWordWithSentiment.ANALYSIS_NAME, book)
+
+    def score(self, slice_size, scored_input_words_df):
+        words = self.book.get_words_lower()
+        prev_count = 0
+        self.scores = []
+
+        source_words = scored_input_words_df.get_scores_by_words()
+        for word in words:
+            if word in source_words:
+                self.scores.append(prev_count)
+                prev_count = 0
+            else:
+                prev_count += 1
+
+        return self.scores
+
+
 # NOT TESTED BELOW
 class SumScoredByScoredCountAnalysis(analysis.general_analysis.GeneralAnalysis):
 

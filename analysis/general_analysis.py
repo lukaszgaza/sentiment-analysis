@@ -15,7 +15,7 @@ class GeneralAnalysis:
         pass
 
     def store_to_file(self, path, with_slice_number = False, with_header = True):
-        file_name = '{}_{}_{}.txt'.format(self.book.get_author(), self.book.get_title(), self.analysis_name)
+        file_name = '{}_{}_{}.txt'.format(self.analysis_name, self.book.get_author(), self.book.get_title())
         file_path = '{}/{}'.format(path, file_name)
 
         slice_number = 1

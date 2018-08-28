@@ -28,6 +28,50 @@ def score_slice_as_avg_of_scored_words(scored_input_words_df, filter_fun):
     return score_slice_as_avg_of_scored_words_helper
 
 
+def score_slice_as_avg_of_all_words(scored_input_words_df, filter_fun):
+    scores_by_words = scored_input_words_df.get_scores_by_words()
+
+    def score_slice_as_avg_of_all_words_helper(slice):
+        total_score = 0.0
+
+        if len(slice) == 0:
+            return 0
+
+        for word in slice:
+            # TODO - remove lowering from here? and all the below?
+            word = word.lower()
+            if word in scores_by_words:
+                score = scores_by_words[word]
+                if filter_fun(score):
+                    total_score += score
+
+        return total_score / len(slice)
+
+    return score_slice_as_avg_of_all_words_helper
+
+
+def score_slice_as_sum_of_all_words(scored_input_words_df, filter_fun):
+    scores_by_words = scored_input_words_df.get_scores_by_words()
+
+    def score_slice_as_sum_of_all_words_helper(slice):
+        total_score = 0.0
+
+        if len(slice) == 0:
+            return 0
+
+        for word in slice:
+            # TODO - remove lowering from here? and all the below?
+            word = word.lower()
+            if word in scores_by_words:
+                score = scores_by_words[word]
+                if filter_fun(score):
+                    total_score += score
+
+        return total_score
+
+    return score_slice_as_sum_of_all_words_helper
+
+
 def score_slice_as_count_of_scored_words(scored_input_words_df, filter_fun):
 
     scores_by_words = scored_input_words_df.get_scores_by_words()
@@ -36,6 +80,7 @@ def score_slice_as_count_of_scored_words(scored_input_words_df, filter_fun):
         count = 0
 
         for word in slice:
+            # TODO - remove lowering from here? and all the below?
             word = word.lower()
             if word in scores_by_words:
                 score = scores_by_words[word]
@@ -46,53 +91,3 @@ def score_slice_as_count_of_scored_words(scored_input_words_df, filter_fun):
         return count
 
     return score_slice_as_count_of_scored_words_helper
-
-
-
-
-# BELOW NOT TESTED
-def score_slice_as_sum_of_scored_words(scored_input_words_df):
-
-    scores_by_words = scored_input_words_df.get_scores_by_words()
-
-    def score_slice_as_sum_of_scored_words_helper(slice):
-
-        if len(slice) == 0:
-            return 0
-
-        total_score = 0.0
-
-        for word in slice:
-            word = word.lower()
-
-            if word in scores_by_words:
-                word_score = scores_by_words[word]
-                total_score += word_score
-
-        return total_score
-
-    return score_slice_as_sum_of_scored_words_helper
-
-
-def score_slice_as_avg_of_all_words(scored_input_words_df):
-
-    # non-scored words have score 0
-
-    scores_by_words = scored_input_words_df.get_scores_by_words()
-
-    def score_slice_as_avg_of_all_words_helper(slice):
-
-        if len(slice) == 0:
-            return 0
-
-        total_score = 0.0
-
-        for word in slice:
-            word = word.lower()
-            if word in scores_by_words:
-                word_score = scores_by_words[word]
-                total_score += word_score
-
-        return float(total_score) / len(slice)
-
-    return score_slice_as_avg_of_all_words_helper

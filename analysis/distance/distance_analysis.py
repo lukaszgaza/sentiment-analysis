@@ -34,7 +34,7 @@ class DistanceToNeutralSentimentAnalysis(analysis.general_analysis.GeneralAnalys
     NEUTRAL_SENTIMENT = 5.0
 
     def __init__(self, book):
-        super().__init__(DistanceToPreviousWordWithSentimentAnalysis.ANALYSIS_NAME, book)
+        super().__init__(DistanceToNeutralSentimentAnalysis.ANALYSIS_NAME, book)
         self.plot_title = 'Distance to neutral (5.0) sentiment sentiment'
         self.plot_xlabel = 'Word number'
         self.plot_ylabel = 'Distance'

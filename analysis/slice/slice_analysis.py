@@ -22,9 +22,6 @@ class SumScoredByScoredCountAnalysisNoNeutralWords(analysis.general_analysis.Gen
         return self.scores
 
 
-
-
-
 class NumberOfWordsWithSentimentPerSliceAnalysis(analysis.general_analysis.GeneralAnalysis):
 
     ANALYSIS_NAME = 'number_of_words_with_sentiment_per_slice'
@@ -40,7 +37,7 @@ class NumberOfWordsWithSentimentPerSliceAnalysis(analysis.general_analysis.Gener
         slices = analysis.slice_generator.SliceGenerator(slice_size).get_non_overlapping_windows(words)
 
         self.scores = list(map(analysis.scoring.score_slice_as_count_of_scored_words(scored_input_words_df,
-                                                                                   analysis.scoring.NEUTRAL_WORD_FILTER), slices))
+                                                                                   analysis.scoring.TRUE_FILTER), slices))
 
         return self.scores
 

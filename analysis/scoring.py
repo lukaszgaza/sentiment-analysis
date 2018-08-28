@@ -13,6 +13,8 @@ def score_slice_as_avg_of_scored_words(scored_input_words_df, filter_fun):
         count = 0
 
         for word in slice:
+            # TODO - remove lowering from here? and all the below?
+            word = word.lower()
             if word in scores_by_words:
                 score = scores_by_words[word]
                 if filter_fun(score):
@@ -34,6 +36,7 @@ def score_slice_as_count_of_scored_words(scored_input_words_df, filter_fun):
         count = 0
 
         for word in slice:
+            word = word.lower()
             if word in scores_by_words:
                 score = scores_by_words[word]
 

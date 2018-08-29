@@ -14,7 +14,7 @@ class GutenbergInput(general_input.Input):
         return nltk.corpus.gutenberg.raw(self.gutenberg_name)
 
     def get_sentences(self):
-        return [word_tokenize(sentence) for sentence in nltk.corpus.gutenberg.sents(self.gutenberg_name)]
+        return nltk.corpus.gutenberg.sents(self.gutenberg_name)
 
     def get_words(self):
         return nltk.corpus.gutenberg.words(self.gutenberg_name)

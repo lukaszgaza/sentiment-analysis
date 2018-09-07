@@ -1,7 +1,9 @@
-AVERAGE_SCORE = 5.0
+AVERAGE_SCORE = 0.0
 DELTA = 1.0
 NEUTRAL_WORD_FILTER = lambda score: score <= AVERAGE_SCORE - DELTA or score >= AVERAGE_SCORE + DELTA
 TRUE_FILTER = lambda score: True
+NEGATIVE_FILTER = lambda score: score < AVERAGE_SCORE
+POSITIVE_FILTER = lambda score: score > AVERAGE_SCORE
 
 
 def score_slice_as_avg_of_scored_words(scored_input_words_df, filter_fun):

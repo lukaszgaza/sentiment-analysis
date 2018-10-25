@@ -11,6 +11,7 @@ class BookAnalysis:
         self.max_score = 0
         self.number_of_words = 0
         self.number_of_scored_words = 0
+        self.number_of_sentences = 0
         self.avg_of_all_words = 0
         self.avg_of_scored_words = 0
         self.scored_percentage = 0
@@ -36,6 +37,7 @@ class BookAnalysis:
 
         self.number_of_scored_words = len(self.scores_with_sentiment)
         self.number_of_words = len(self.scores_all)
+        self.number_of_sentences = len(self.book.get_sentences())
         self.avg_of_scored_words = sum(self.scores_with_sentiment) / self.number_of_scored_words
         self.avg_of_all_words = sum(self.scores_all) / self.number_of_words
         self.min_score = min(self.scores_all)
@@ -47,6 +49,7 @@ class BookAnalysis:
         print("Book author: {}".format(self.book.get_author()))
         print("Number of all words {}".format(self.number_of_words))
         print("Number of scored words {}".format(self.number_of_scored_words))
+        print("Number of sentences {}".format(self.number_of_sentences))
         print("Percentage of scored words: {}%".format(self.scored_percentage))
         print("Min score: {}".format(self.min_score))
         print("Max score: {}".format(self.max_score))

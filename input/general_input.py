@@ -6,6 +6,9 @@ class Input:
     def get_author(self):
         return str(self.author)
 
+    def get_author_name(self):
+        return '{}_{}'.format(self.author.name.lower(), self.author.surname.lower())
+
     def get_raw_text(self):
         pass
 

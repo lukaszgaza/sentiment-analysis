@@ -57,7 +57,7 @@ class BookAnalysis:
         print("Avg score (for scored words): {}".format(self.avg_of_scored_words))
 
     def store_to_file(self, path, with_header = True):
-        file_name = '{}_{}_{}.txt'.format(self.analysis_name, self.book.get_author(), self.book.get_title())
+        file_name = '{}_{}_{}.txt'.format(self.analysis_name, self.book.get_author_name(), self.book.get_title())
         file_path = '{}/{}'.format(path, file_name)
 
         with open(file_path, 'w+') as file:

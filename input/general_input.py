@@ -4,7 +4,7 @@ class Input:
         return self.title
 
     def get_author(self):
-        return self.author
+        return str(self.author)
 
     def get_raw_text(self):
         pass

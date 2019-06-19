@@ -56,9 +56,13 @@ class BookAnalysis:
         print("Avg score (for all words, not scored have score 0): {}".format(self.avg_of_all_words))
         print("Avg score (for scored words): {}".format(self.avg_of_scored_words))
 
-    def store_to_file(self, path, with_header = True):
+    def store_to_file(self, path, book_type, analysis_type, with_header = True):
         file_name = '{}_{}_{}.txt'.format(self.analysis_name, self.book.get_author_name(), self.book.get_title())
-        file_path = '{}/{}'.format(path, file_name)
+        directory = '{}/{}/{}'.format(path, book_type, analysis_type)
+        import os
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        file_path = '{}/{}'.format(directory, file_name)
 
         with open(file_path, 'w+') as file:
             score_writer = csv.writer(file)

@@ -1,0 +1,1 @@
+remove page numbers from the files in translations

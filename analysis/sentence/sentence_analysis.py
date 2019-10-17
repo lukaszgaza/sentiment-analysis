@@ -11,9 +11,10 @@ class SumScoredByScoredCountPerSentenceAnalysisNoNeutralWords(analysis.general_a
         self.plot_title = 'Sentiment as sum of scored words in a sentence by count of scored words'
         self.plot_xlabel = 'Sentence number'
         self.plot_ylabel = 'Sentiment'
+        self.sentence = []
 
     def score(self, slice_size, scored_input_words_df):
-        sentences = self.book.get_sentences()
+        self.sentences = self.book.get_sentences()
 
         self.scores = list(map(analysis.scoring.score_slice_as_avg_of_scored_words(scored_input_words_df, analysis.scoring.NEUTRAL_WORD_FILTER), sentences))
 
@@ -47,11 +48,13 @@ class SumScoredByAllCountPerSentenceAnalysis(analysis.general_analysis.GeneralAn
         self.plot_title = 'Sentiment as sum of scored words in a sentence by count of all words'
         self.plot_xlabel = 'Sentence number'
         self.plot_ylabel = 'Sentiment'
+        self.senteces = []
 
     def score(self, slice_size, scored_input_words_df):
-        sentences = self.book.get_sentences()
+        self.sentences = self.book.get_sentences()
+        sentences = self.senteces
 
-        self.scores = list(map(analysis.scoring.score_slice_as_avg_of_all_words(scored_input_words_df, analysis.scoring.TRUE_FILTER), sentences))
+        self.scores = list(map(analysis.scoring.score_slice_as_avg_of_all_words(scored_input_words_df, analysis.scoring.TRUE_FILTER), self.sentences))
 
         return self.scores
 

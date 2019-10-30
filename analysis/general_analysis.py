@@ -14,9 +14,14 @@ class GeneralAnalysis:
     def score(self, slice_size, scored_input_words_df):
         pass
 
-    def store_to_file(self, path, with_slice_number = False, with_header = True):
+    def store_to_file(self, path, book_type, analysis_type, with_slice_number = False, with_header = True):
         file_name = '{}_{}_{}.txt'.format(self.analysis_name, self.book.get_author_name(), self.book.get_title())
-        file_path = '{}/{}'.format(path, file_name)
+        directory = '{}/{}/{}'.format(path, book_type, analysis_type)
+        file_path = '{}/{}'.format(directory, file_name)
+
+        import os
+        if not os.path.exists(directory):
+            os.makedirs(directory)
 
         slice_number = 1
         with open(file_path, 'w+') as file:

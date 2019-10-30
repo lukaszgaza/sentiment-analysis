@@ -220,3 +220,21 @@ class NumberOfWordsPerSentenceAnalysis(analysis.general_analysis.GeneralAnalysis
         self.scores = list(map(len, sentences))
 
         return self.scores
+
+
+class SumModuloScoredPerSentenceAnalysis(analysis.general_analysis.GeneralAnalysis):
+
+    ANALYSIS_NAME = 'sum_modulo_scored_per_sentence'
+
+    def __init__(self, book):
+        super().__init__(SumModuloScoredPerSentenceAnalysis.ANALYSIS_NAME, book)
+        self.plot_title = 'Sentiment as sum of module of scored words in a sentence'
+        self.plot_xlabel = 'Sentence number'
+        self.plot_ylabel = 'Sentiment'
+
+    def score(self, slice_size, scored_input_words_df):
+        sentences = self.book.get_sentences()
+
+        self.scores = list(map(analysis.scoring.score_slice_as_sum_of_modulo_of_all_words(scored_input_words_df, analysis.scoring.TRUE_FILTER), sentences))
+
+        return self.scores
